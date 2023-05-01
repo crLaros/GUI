@@ -5,7 +5,6 @@
 repeat task.wait() until game:IsLoaded()
 
 -- Localization
-local Game_Name = "nil"
 local fromRGB = Color3.fromRGB
 local newUDim2 = UDim2.new
 local newVector2 = Vector2.new
@@ -4541,7 +4540,7 @@ function library:Load(options)
     utility.format(options)
 
     utility.defaults(options, {
-        title = Game_Name,
+        title = "Made by crLaros",
         theme = "Default",
         overrides = {},
         folder = "exodus",
