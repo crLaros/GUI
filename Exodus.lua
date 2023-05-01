@@ -5298,7 +5298,7 @@ function library:Load(options)
 
         
 
-        local notifications_section = settings:Section{name = "Notifications"}
+        local notifications_section = settings:Section{name = "Notifications",Side = "right"}
 
         notifications_section:Slider{
             name = "Notification Speed",
@@ -5324,7 +5324,7 @@ function library:Load(options)
         }
 
         if watermark then
-            local watermark_section = settings:Section{name = "Watermark"}
+            local watermark_section = settings:Section{name = "Watermark",Side = "right"}
             watermark:Toggle()
 
             watermark_section:Toggle{
