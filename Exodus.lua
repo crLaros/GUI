@@ -5154,7 +5154,6 @@ function library:Load(options)
 
         local settings = self:Tab("Settings")
         local configs = settings:Section{name = "Configs"}
-        local autoload
 
         local config_dropdown = configs:Dropdown{
             name = "Config",
@@ -5162,13 +5161,6 @@ function library:Load(options)
             content = library:GetConfigs(),
             flag = "selected_config",
             callback = function(selected)
-                if (autoload) then
-                    local auto_load_config = library:GetAutoLoadConfig();
-
-                    if (selected == auto_load_config) then
-                        autoload:set(true);
-                    end
-                end
             end
         }
 
@@ -5423,7 +5415,7 @@ function library:Load(options)
             end
         }
 
-        misc:Label("UI Maker vozoid#1346")
+        misc:Label("UI Maker gdgdgdgd")
         return settings
     end
 
