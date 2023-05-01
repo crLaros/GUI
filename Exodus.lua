@@ -5246,7 +5246,7 @@ function library:Load(options)
             end
         }
 
-        local themes, customTheme = settings:multiSection{Side = "middle", Sections = { "Themes", "Custom Theme" }}
+        local themes, customTheme = settings:multiSection{Side = "left", Sections = { "Themes", "Custom Theme" }}
         local theme_colorpickers = {}
         library.theme_colorpickers = theme_colorpickers;
 
@@ -5374,7 +5374,7 @@ function library:Load(options)
 
         misc:Toggle{
             name = "Show Keybind List",
-            default = library.keybind_list_default,
+            default = false,
             flag = "keybind_list",
             callback = function(value)
                 if library.keybind_list.object.Visible ~= value then
@@ -5385,7 +5385,7 @@ function library:Load(options)
 
         misc:Toggle{
             name = "Show Player List",
-            default = library.keybind_list_default,
+            default = false,
             flag = "player_list",
             callback = function(value)
                 library.Playerlist.toggled = value
@@ -5433,16 +5433,6 @@ function library:Load(options)
             end
         }
         
-        misc:Dropdown{
-            name = "Easing Style",
-            default = tostring(library.easing_style):gsub("Enum.EasingStyle.", ""),
-            content = {"Linear", "Sine", "Back", "Quad", "Quart", "Quint", "Bounce", "Elastic", "Exponential", "Circular", "Cubic"},
-            flag = "easing_style",
-            callback = function(style)
-                library.easing_style = Enum.EasingStyle[style]
-            end
-        }
-
         misc:Button{
             name = "Unload",
             callback = unload or function()
