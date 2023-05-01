@@ -5227,25 +5227,6 @@ function library:Load(options)
             end
         }
 
-        autoload = configs:Toggle{
-            name = "Autoload Config",
-            default = false,
-            flag = "auto_load",
-            callback = function(value)
-                if library.initialized then
-                    local selected = library.flags["selected_config"];
-
-                    if (selected) then
-                        library:SetAutoLoadConfig(value and selected or "");
-
-                        if (value) then
-                            library:Notify{title = "Configuration", message = ("Successfully set config '%s' as auto load"):format(library.flags["selected_config"])}
-                        end
-                    end
-                end
-            end
-        }
-
         local themes, customTheme = settings:multiSection{Side = "left", Sections = { "Themes", "Custom Theme" }}
         local theme_colorpickers = {}
         library.theme_colorpickers = theme_colorpickers;
@@ -5315,6 +5296,33 @@ function library:Load(options)
             }
         end
 
+        
+
+        local notifications_section = settings:Section{name = "Notifications"}
+
+        notifications_section:Slider{
+            name = "Notification Speed",
+            default = library.notification_speed,
+            min = 0,
+            max = 1,
+            callback = function(value)
+                library.notification_speed = value;
+            end
+        }
+
+        notifications_section:Dropdown{
+            name = "Notification Alignment",
+            default = library.notification_y:gsub("^%l", upper) .. " " .. library.notification_x:gsub("^%l", upper),
+            content = {"Top Left", "Top Right", "Bottom Left", "Bottom Right"},
+            callback = function(alignment)
+                if alignment then
+                    alignment = alignment:split(" ")
+                    local y, x = alignment[1], alignment[2]
+                    library:ChangeNotificationPosition(x, y)
+                end
+            end
+        }
+
         if watermark then
             local watermark_section = settings:Section{name = "Watermark"}
             watermark:Toggle()
@@ -5344,31 +5352,6 @@ function library:Load(options)
                 end
             }
         end
-
-        local notifications_section = settings:Section{name = "Notifications"}
-
-        notifications_section:Slider{
-            name = "Notification Speed",
-            default = library.notification_speed,
-            min = 0,
-            max = 1,
-            callback = function(value)
-                library.notification_speed = value;
-            end
-        }
-
-        notifications_section:Dropdown{
-            name = "Notification Alignment",
-            default = library.notification_y:gsub("^%l", upper) .. " " .. library.notification_x:gsub("^%l", upper),
-            content = {"Top Left", "Top Right", "Bottom Left", "Bottom Right"},
-            callback = function(alignment)
-                if alignment then
-                    alignment = alignment:split(" ")
-                    local y, x = alignment[1], alignment[2]
-                    library:ChangeNotificationPosition(x, y)
-                end
-            end
-        }
 
         local misc = settings:Section{name = "Cheat", Side = "right"}
 
