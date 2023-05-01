@@ -5407,7 +5407,7 @@ function library:Load(options)
 
         misc:Keybind{
             name = "Menu Key",
-            default = Enum.KeyCode.RightShift,
+            default = Enum.KeyCode.Home,
             blacklist = {Enum.UserInputType.MouseButton1, Enum.UserInputType.MouseButton2, Enum.UserInputType.MouseButton3},
             flag = "menu_key",
             listignored = true,
@@ -5432,29 +5432,7 @@ function library:Load(options)
                 end
             end
         }
-
-        misc:Slider{
-            name = "Tween Speed",
-            default = library.tween_speed,
-            min = 0,
-            max = 1,
-            flag = "tween_speed",
-            callback = function(value)
-                library.tween_speed = value;
-            end
-        }
-
-        misc:Slider{
-            name = "Fade Speed",
-            default = library.fade_speed,
-            min = 0,
-            max = 1,
-            flag = "fade_speed",
-            callback = function(value)
-                library.toggle_speed = value;
-            end
-        }
-
+        
         misc:Dropdown{
             name = "Easing Style",
             default = tostring(library.easing_style):gsub("Enum.EasingStyle.", ""),
@@ -5471,47 +5449,6 @@ function library:Load(options)
                 library:Unload();
             end
         }
-
-        misc:Button{
-            name = "Copy Game Invite (CONSOLE)",
-            callback = function()
-                setclipboard(('Roblox.GameLauncher.joinGameInstance(%s, "%s")'):format(game.PlaceId, game.JobId))
-            end
-        }
-
-        misc:Button{
-            name = "Copy Game Invite (LUA)",
-            callback = function()
-                setclipboard(('game:GetService("TeleportService"):TeleportToPlaceInstance(%s, "%s")'):format(game.PlaceId, game.JobId))
-            end
-        }
-
-        misc:Button{
-            name = "Join Discord Server",
-            callback = function()
-                request{
-                    ["Url"] = "http://127.0.0.1:6463/rpc?v=1",
-                    ["Method"] = "POST",
-                    ["Headers"] = {
-                        ["Content-Type"] = "application/json",
-                        ["Origin"] = "https://discord.com"
-                    },
-                    ["Body"] = services.HttpService:JSONEncode{
-                        ["cmd"] = "INVITE_BROWSER",
-                        ["nonce"] = ".",
-                        ["args"] = {code = library.discord}
-                    }
-                }
-            end
-        }
-
-        misc:Button{
-            name = "Copy Discord Invite",
-            callback = function()
-                setclipboard(library.discord)
-            end
-        }
-
         return settings
     end
 
