@@ -5227,7 +5227,7 @@ function library:Load(options)
             end
         }
 
-        local themes, customTheme = settings:multiSection{Side = "left", Sections = { "Themes", "Custom Theme" }}
+        local themes, customTheme = settings:multiSection{Side = "middle", Sections = { "Themes", "Custom Theme" }}
         local theme_colorpickers = {}
         library.theme_colorpickers = theme_colorpickers;
 
