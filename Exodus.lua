@@ -5415,7 +5415,7 @@ function library:Load(options)
             end
         }
 
-        misc:Label("UI Maker gdgdgdgd")
+        misc:Label("UI Maker vozoid#1346")
         return settings
     end
 
